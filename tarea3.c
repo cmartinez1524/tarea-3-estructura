@@ -3,16 +3,39 @@
 #include "tdas/list.h"
 #include "tdas/heap.h"
 #include "tdas/extra.h"
+#include "tdas/stack.h"
+#include "tdas/queue.h"
 #include <string.h>
 
-// Definición de la estructura para el estado del puzzle
 typedef struct {
-    int square[3][3]; // Matriz 3x3 que representa el tablero
-    int x;    // Posición x del espacio vacío
-    int y;    // Posición y del espacio vacío
-    List* actions; //Secuencia de movimientos para llegar al estado
+
+        int square[3][3]; // Matriz 3x3 que representa el tablero
+        int x;    // Posición x del espacio vacío
+        int y;    // Posición y del espacio vacío
+        int nActions;
+
 } State;
 
+typedef struct Node {
+
+        State state;
+        struct Node* parent;
+
+} Node;
+
+
+void mostrarMenuPrincipal() {
+
+        limpiarPantalla();
+        puts("========================================\n");
+        puts("     Escoge método de búsqueda\n");
+        puts("========================================\n");
+
+        puts("1) Búsqueda en Profundidad");
+        puts("2) Buscar en Anchura");
+        puts("3) Salir\n");
+
+}
 int distancia_L1(State* state) {
     int ev=0;
     int k=1;
@@ -43,72 +66,44 @@ void imprimirEstado(const State *estado) {
 
 
 int main() {
-    // Estado inicial del puzzle
-    State estado_inicial = {
-        {{0, 2, 8}, // Primera fila (0 representa espacio vacío)
-         {1, 3, 4}, // Segunda fila
-         {6, 5, 7}, // Tercera fila
-         },  
-        0, 1   // Posición del espacio vacío (fila 0, columna 1)
-    };
-    estado_inicial.actions = list_create();
 
-    // Imprime el estado inicial
-    printf("Estado inicial del puzzle:\n");
-    imprimirEstado(&estado_inicial);
+        State estado_inicial = {
+                {{0, 2, 8}, // Primera fila (0 representa espacio vacío)
+                 {1, 3, 4}, // Segunda fila
+                 {6, 5, 7}, // Tercera fila
+                 },  
+                0, 0   // Posición del espacio vacío (fila 0, columna 1)
+        };
 
-    printf("Distancia L1:%d\n", distancia_L1(&estado_inicial));
+        estado_inicial.nActions = 0;
 
-    //Ejemplo de heap (cola con prioridad)
-    printf("\n***** EJEMPLO USO DE HEAP ******\nCreamos un Heap e insertamos 3 elementos con distinta prioridad\n");
-    Heap* heap = heap_create();
-    char* data = strdup("Cinco");
-    printf("Insertamos el elemento %s con prioridad -5\n", data);
-    heap_push(heap, data, -5 /*prioridad*/);
-    data = strdup("Seis");
-    printf("Insertamos el elemento %s con prioridad -6\n", data);
-    heap_push(heap, data, -6 /*prioridad*/);
-    data = strdup("Siete");
-    printf("Insertamos el elemento %s con prioridad -7\n", data);
-    heap_push(heap, data, -7 /*prioridad*/);
 
-    printf("\nLos elementos salen del Heap ordenados de mayor a menor prioridad\n");
-    while (heap_top(heap) != NULL){
-        printf("Top: %s\n", (char*) heap_top(heap));      
-        heap_pop(heap);
-    }
-    printf("No hay más elementos en el Heap\n");
+        int opcion;
+        int cont = 0;
 
-    int opcion;
-    do {
-        printf("\n***** EJEMPLO MENU ******\n");
-        puts("========================================");
-        puts("     Escoge método de búsqueda");
-        puts("========================================");
-        
-        puts("1) Búsqueda en Profundidad");
-        puts("2) Buscar en Anchura");
-        puts("3) Buscar Mejor Primero");
-        puts("4) Salir");
-    
-        printf("Ingrese su opción: ");
-        scanf(" %c", &opcion);
-    
-        switch (opcion) {
-        case '1':
-          //dfs(estado_inicial);
-          break;
-        case '2':
-          //bfs(estado_inicial);
-          break;
-        case '3':
-          //best_first(estado_inicial);
-          break;
-        }
-        presioneTeclaParaContinuar();
-        limpiarPantalla();
+        do {
 
-  } while (opcion != '4');
+                mostrarMenuPrincipal();
+                printf("Ingrese su opción: ");
+                scanf(" %d", &opcion);
 
-  return 0;
+                switch (opcion) {
+                case 1:
+
+                    dfs(estado_inicial, cont);
+                    break;
+                case 2:
+
+                    bfs(estado_inicial, cont);
+                    break;
+                case 3:
+                        printf("Saliendo del programa...\n");
+                        break;
+                }
+                presioneTeclaParaContinuar();
+                limpiarPantalla();
+
+    } while (opcion != 3);
+
+    return 0;
 }
