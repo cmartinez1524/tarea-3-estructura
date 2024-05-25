@@ -29,4 +29,4 @@ Se incluyen los siguientes ejemplos:
 * `example1_list`: Uso del TDA Lista, inserción y eliminación de elementos.
 * `example2_menu`: Ejemplo de menú con submenús.
 * `example3_readcsv`: Ejemplo de lectura desde un archivo csv y almacenamiento en datos estructurados.
-* `example4_map`: Ejemplo de uso del TDA mapa.
+* `example4_map`: Ejemplo de uso del TDA mapa.# tarea-3-estructura
