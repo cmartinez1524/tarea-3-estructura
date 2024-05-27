@@ -1,6 +1,6 @@
-En este *repl* puedes encontrar varios ejemplos que te pueden ayudar con las tareas de estructura.
 
-Para ejecutar el ejemplo tarea3 primero debemos compilar (en la carpeta raíz)
+
+Para ejecutar la tarea3 primero debemos compilar (en la carpeta raíz)
 ````
 gcc tdas/*.c tarea3.c -Wno-unused-result -o tarea3
 ````
@@ -10,23 +10,122 @@ Y luego ejecutar:
 ./tarea3
 ````
 
-## TDAs
-En la carpeta `tdas` se encuentran implementados distintos TDAs que puedes utilizar (lista, pila, cola, cola con prioridad y mapas). 
+2. Opciones que Funcionan Correctamente y las que No Funcionan Correctamente
+Búsqueda en Profundidad (Opción 1):
 
-Las implementaciones no son las más eficientes (todas usan como estructura de datos una **lista enlazada**), por lo que puedes reemplazarlas por las que has realizado en los labs.
+Realiza una búsqueda en profundidad para resolver el puzzle.
+Limita el número de movimientos a 15 para evitar búsquedas excesivamente profundas.
+Muestra los pasos desde el estado inicial hasta el estado final si encuentra una solución.
+Búsqueda en Anchura (Opción 2):
 
-## Otros códigos (en carpeta examples)
-Para ejecutar los distintos ejemplos que hay en la carpeta `examples`, primero debes compilarlos. Si estamos en la carpeta raíz:
-````
-gcc tdas/*.c examples/example2_menu.c -Wno-unused-result -o example
-````
-Y luego ejecutarlos:
-````
-./example
-````
+Realiza una búsqueda en anchura para resolver el puzzle.
+Limita el número de iteraciones a 15,000,000 para evitar largos tiempos de ejecución.
+Muestra los pasos desde el estado inicial hasta el estado final si encuentra una solución.
+Salir (Opción 3):
 
-Se incluyen los siguientes ejemplos:
-* `example1_list`: Uso del TDA Lista, inserción y eliminación de elementos.
-* `example2_menu`: Ejemplo de menú con submenús.
-* `example3_readcsv`: Ejemplo de lectura desde un archivo csv y almacenamiento en datos estructurados.
-* `example4_map`: Ejemplo de uso del TDA mapa.# tarea-3-estructura
+Finaliza el programa.
+Opciones que No Funcionan Correctamente
+Hasta el momento, todas las opciones implementadas funcionan correctamente.
+
+
+3. Ejemplo Mostrando Cómo Interactuar con la Aplicación
+Ejemplo de Ejecución
+Al iniciar el programa, verá el siguiente menú:
+````
+========================================
+          BIENVENIDO AL MENU           
+========================================
+
+     Escoge método de búsqueda
+
+========================================
+
+1) Búsqueda en Profundidad
+2) Búsqueda en Anchura
+3) Salir
+
+========================================
+Por favor, ingrese su elección (1-3): 
+
+````
+Por favor, ingrese su elección (1-3): 1
+
+````
+Estado Original:
+
+x 2 8 
+1 3 4 
+6 5 7 
+
+¡Puzzle resuelto!
+Iteraciones: 4
+
+Estado Inicial:
+
+x 2 8 
+1 3 4 
+6 5 7 
+
+Paso 3:
+
+1 x 8 
+6 2 4 
+7 3 5 
+
+Paso 2:
+
+1 2 8 
+x 3 4 
+6 5 7 
+
+Paso 1:
+
+x 2 8 
+1 3 4 
+6 5 7 
+
+````
+Opción 2: Búsqueda en Anchura
+````
+Por favor, ingrese su elección (1-3): 2
+
+Estado Inicial:
+
+x 2 8 
+1 3 4 
+6 5 7 
+
+¡Puzzle resuelto!
+Iteraciones: 5
+
+Estado Inicial:
+
+x 2 8 
+1 3 4 
+6 5 7 
+
+Paso 4:
+
+1 x 8 
+6 2 4 
+7 3 5 
+
+Paso 3:
+
+1 2 8 
+x 3 4 
+6 5 7 
+
+Paso 2:
+
+x 2 8 
+1 3 4 
+6 5 7 
+
+````
+Opción 3: Salir
+````
+Por favor, ingrese su elección (1-3): 3
+Saliendo del programa...
+
+````
