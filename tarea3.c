@@ -21,28 +21,7 @@ typedef struct Node {
     struct Node* parent;   // Puntero al nodo padre
 } Node;
 
-// Función para mostrar el menú principal
-void mostrarMenuPrincipal() {
-    limpiarPantalla();
-    puts("========================================");
-    puts("          BIENVENIDO AL MENU           ");
-    puts("========================================\n");
-    puts("     Escoge método de búsqueda\n");
-    puts("========================================\n");
 
-    puts("1) Búsqueda en Profundidad");
-    puts("2) Búsqueda en Anchura");
-    puts("3) Salir\n");
-
-    puts("========================================");
-    printf("Por favor, ingrese su elección (1-3): ");
-}
-
-
-// Función que verifica si un movimiento es válido
-int esMovimientoValido(int x, int y) { 
-    return (x >= 0 && x < 3 && y >= 0 && y < 3); 
-}
 
 
 
@@ -58,6 +37,10 @@ void copiarEstado(State original, State* nuevo) {
     nuevo->Acciones = original.Acciones;
 }
 
+// Función que verifica si un movimiento es válido
+int esMovimientoValido(int x, int y) { 
+    return (x >= 0 && x < 3 && y >= 0 && y < 3); 
+}
 // Función que realiza un movimiento en el estado actual
 void moverEspacio(State* current, int opcion) {
     int x = current->x;
@@ -306,6 +289,23 @@ void busquedaEnAnchura(State estadoInicial, int conteo) {
 
     printf("No se encontró la solución.\n");
     queue_clean(cola);
+}
+
+// Función para mostrar el menú principal
+void mostrarMenuPrincipal() {
+    limpiarPantalla();
+    puts("========================================");
+    puts("          BIENVENIDO AL MENU           ");
+    puts("========================================\n");
+    puts("     Escoge método de búsqueda\n");
+    puts("========================================\n");
+
+    puts("1) Búsqueda en Profundidad");
+    puts("2) Búsqueda en Anchura");
+    puts("3) Salir\n");
+
+    puts("========================================");
+    printf("Por favor, ingrese su elección (1-3): ");
 }
 
 // Función principal
